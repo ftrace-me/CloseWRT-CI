@@ -62,6 +62,7 @@ if [ -f "$RUST_FILE" ]; then
  	echo " "
 
  	sed -i 's/ci-llvm=true/ci-llvm=false/g' $RUST_FILE
+	sed -i 's/download-ci-llvm = true/download-ci-llvm = false/g' $RUST_FILE
 
 	cd $PKG_PATH && echo "rust has been fixed!"
 fi
