@@ -1,5 +1,5 @@
 #CI项目
-name: CWRT-ALL
+name: 京东云百里闭源固件编译
 
 #CI计划
 on:
