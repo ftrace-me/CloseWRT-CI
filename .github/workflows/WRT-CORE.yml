@@ -69,7 +69,7 @@ jobs:
           DEBIAN_FRONTEND: noninteractive
         run: |
           sudo -E apt -yqq update
-          sudo -E apt -yqq install dos2unix python3-netifaces libfuse-dev
+          sudo -E apt -yqq install dos2unix python3-netifaces libfuse-dev aria2
           sudo bash -c 'bash <(curl -sL https://build-scripts.immortalwrt.org/init_build_environment.sh)'
           sudo -E systemctl daemon-reload
           sudo -E timedatectl set-timezone "Asia/Shanghai"
@@ -120,6 +120,7 @@ jobs:
             ${{env.WRT_CONFIG}}-
           path: |
             ./wrt/.ccache
+            ./wrt/dl
             ./wrt/staging_dir/host*
             ./wrt/staging_dir/tool*
 
@@ -180,7 +181,7 @@ jobs:
         run: |
           cd ./wrt/
 
-          make download -j$(nproc)
+          make download -j$(nproc) CP_CMD="cp -fp" ARIA2_CMD="aria2c --allow-overwrite=true -c -x16 -s16 -j16"
 
       - name: Compile Firmware
         if: env.WRT_TEST != 'true'
@@ -222,7 +223,7 @@ jobs:
 
             find ./bin/targets/ -type f -exec mv -f {} ./upload/ \;
 
-            make clean -j$(nproc)
+
           fi
 
       - name: Release Firmware

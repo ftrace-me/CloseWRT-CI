@@ -3,9 +3,6 @@ name: 京东云百里闭源固件编译
 
 #CI计划
 on:
-  push:
-    branches:
-      - main
   #自动编译：每天凌晨4点 (北京时间)
   schedule:
     - cron: 0 20 * * *
