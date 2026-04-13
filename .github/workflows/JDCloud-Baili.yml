@@ -3,9 +3,12 @@ name: 京东云百里闭源固件编译
 
 #CI计划
 on:
-  #自动编译：早上6点
+  push:
+    branches:
+      - main
+  #自动编译：每天凌晨4点 (北京时间)
   schedule:
-    - cron: 0 22 * * 0
+    - cron: 0 20 * * *
   #手动编译
   workflow_dispatch:
     inputs:
@@ -57,15 +60,15 @@ jobs:
       #编译配置
       WRT_CONFIG: ${{matrix.CONFIG}}
       #默认主题
-      WRT_THEME: aurora
+      WRT_THEME: argon
       #默认主机名
-      WRT_NAME: JDCloud-Bail
+      WRT_NAME: OpenWrt
       #默认WIFI名称
-      WRT_SSID: JDCwifi
+      WRT_SSID: OpenWrt
       #默认WIFI密码
-      WRT_WORD: 12345678
+      WRT_WORD: ""
       #默认地址
-      WRT_IP: 192.168.68.1
+      WRT_IP: 192.168.2.1
       #默认密码，仅作提示，修改无用
       WRT_PW: 无
       #源码链接
