@@ -1,8 +1,8 @@
 #设备平台
 CONFIG_TARGET_mediatek=y
-CONFIG_TARGET_mediatek_mt7981=y
-#设备列表
-CONFIG_TARGET_DEVICE_mediatek_mt7981_DEVICE_h3c_nx30pro=y
+CONFIG_TARGET_mediatek_filogic=y
+#设备列表（OpenWrt U-Boot布局，已刷第三方U-Boot）
+CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_h3c_magic-nx30-pro=y
 #必选组件
 CONFIG_first_card_name="MT7981"
 CONFIG_MTK_CHIP_MT7981=y
