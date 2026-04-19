@@ -52,7 +52,7 @@ jobs:
       matrix:
         CONFIG: [MT7981]
         REPO_INFO:
-          - {SOURCE: "padavanonly/immortalwrt-mt798x-6.6", BRANCH: "openwrt-24.10-6.6"}
+          - {SOURCE: "zackzmai/immortalwrt-mt798x-6.6", BRANCH: "nx30pro-nmbm-build"}
 
     #调用公用编译核心WRT-CORE.yml
     uses: ./.github/workflows/WRT-CORE.yml
