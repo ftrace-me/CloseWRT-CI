@@ -169,7 +169,13 @@ jobs:
           if [[ "${WRT_CONFIG,,}" == *"test"* ]]; then
             cat $GITHUB_WORKSPACE/Config/$WRT_CONFIG.txt >> .config
           else
-            cat $GITHUB_WORKSPACE/Config/$WRT_CONFIG.txt $GITHUB_WORKSPACE/Config/GENERAL.txt >> .config
+            # 优先使用设备专属的 GENERAL 文件，否则使用通用 GENERAL
+            GENERAL_FILE="$GITHUB_WORKSPACE/Config/GENERAL-$WRT_CONFIG.txt"
+            if [ ! -f "$GENERAL_FILE" ]; then
+              GENERAL_FILE="$GITHUB_WORKSPACE/Config/GENERAL.txt"
+            fi
+            echo "Using GENERAL config: $GENERAL_FILE"
+            cat $GITHUB_WORKSPACE/Config/$WRT_CONFIG.txt $GENERAL_FILE >> .config
           fi
 
           $GITHUB_WORKSPACE/Scripts/Settings.sh
