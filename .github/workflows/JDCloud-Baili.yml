@@ -30,15 +30,19 @@ jobs:
   cleanup:
     runs-on: ubuntu-latest
     steps:
-      - name: Delete old Releases and Workflows
-        uses: ophub/delete-releases-workflows@main
-        with:
-          gh_token: ${{secrets.GITHUB_TOKEN}}
-          delete_releases: true
-          releases_keep_latest: 0
-          delete_tags: true
-          delete_workflows: true
-          workflows_keep_day: 0
+      - name: Delete old Releases (MT7986 only)
+        env:
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          # 只删除本设备 (MT7986) 的旧 Release，不影响其他设备
+          echo "Cleaning up MT7986 releases..."
+          gh release list --repo ${{github.repository}} --limit 50 | while read -r line; do
+            TAG=$(echo "$line" | awk '{print $3}')
+            if [[ "$TAG" == MT7986-* ]]; then
+              echo "Deleting release: $TAG"
+              gh release delete "$TAG" --repo ${{github.repository}} --yes --cleanup-tag || true
+            fi
+          done
 
   config:
     needs: cleanup
