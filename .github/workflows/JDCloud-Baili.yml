@@ -34,13 +34,23 @@ jobs:
         env:
           GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
-          # 只删除本设备 (MT7986) 的旧 Release，不影响其他设备
-          echo "Cleaning up MT7986 releases..."
-          gh release list --repo ${{github.repository}} --limit 50 | while read -r line; do
-            TAG=$(echo "$line" | awk '{print $3}')
-            if [[ "$TAG" == MT7986-* ]]; then
-              echo "Deleting release: $TAG"
-              gh release delete "$TAG" --repo ${{github.repository}} --yes --cleanup-tag || true
+          # 只删除本设备 (MT7986) 的旧 Release
+          RELEASES=$(gh release list --repo ${{github.repository}} --limit 100 --json tagName --jq '.[] | select(.tagName | startswith("MT7986-")) | .tagName')
+          for TAG in $RELEASES; do
+            echo "Deleting release: $TAG"
+            gh release delete "$TAG" --repo ${{github.repository}} --yes --cleanup-tag || true
+          done
+
+      - name: Delete old Workflow Runs
+        env:
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          # 只删除本工作流的旧运行记录
+          RUNS=$(gh run list --workflow "${{github.workflow}}" --limit 100 --json databaseId --jq '.[] | .databaseId')
+          for RUN_ID in $RUNS; do
+            if [ "$RUN_ID" != "${{github.run_id}}" ]; then
+              echo "Deleting run: $RUN_ID"
+              gh run delete "$RUN_ID" --repo ${{github.repository}} || true
             fi
           done
 
