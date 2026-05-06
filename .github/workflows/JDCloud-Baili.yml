@@ -30,6 +30,9 @@ jobs:
   cleanup:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@main
+
       - name: Delete old Releases (MT7986 only)
         env:
           GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
