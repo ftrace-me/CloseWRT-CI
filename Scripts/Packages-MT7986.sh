@@ -49,8 +49,12 @@ UPDATE_PACKAGE() {
 # 启用及拉取的第三方包
 UPDATE_PACKAGE "nikki" "nikkinikki-org/OpenWrt-nikki" "main" "" "mihomo-meta mihomo-alpha mihomo"
 rm -rf ./OpenWrt-nikki/mihomo-alpha
+
+# Upgrade golang to 1.26 to fix daed build error "requires go >= 1.26.0"
+rm -rf ../feeds/packages/lang/golang
+git clone --depth=1 --single-branch --branch 26.x https://github.com/sbwml/packages_lang_golang.git ../feeds/packages/lang/golang
+
 UPDATE_PACKAGE "daed" "QiuSimons/luci-app-daed" "kix"
-sed -i 's/GOEXPERIMENT=newinliner,simd/GOEXPERIMENT=newinliner/g' ./luci-app-daed/daed/Makefile
 UPDATE_PACKAGE "diskman" "lisaac/luci-app-diskman" "master"
 UPDATE_PACKAGE "openlist2" "sbwml/luci-app-openlist2" "main"
 UPDATE_PACKAGE "partexp" "sirpdboy/luci-app-partexp" "main"
