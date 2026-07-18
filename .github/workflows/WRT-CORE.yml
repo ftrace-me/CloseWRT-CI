@@ -152,7 +152,6 @@ jobs:
         run: |
           cd ./wrt/
           rm -rf ./package/OpenWrt-nikki
-          rm -rf ./package/luci-app-daed
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
