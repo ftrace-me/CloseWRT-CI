@@ -48,6 +48,8 @@ UPDATE_PACKAGE() {
 
 # 启用及拉取的第三方包
 UPDATE_PACKAGE "nikki" "nikkinikki-org/OpenWrt-nikki" "main" "" "mihomo-meta mihomo-alpha mihomo"
+rm -rf ./OpenWrt-nikki/mihomo-alpha
+UPDATE_PACKAGE "daed" "QiuSimons/luci-app-daed" "kix"
 UPDATE_PACKAGE "diskman" "lisaac/luci-app-diskman" "master"
 UPDATE_PACKAGE "openlist2" "sbwml/luci-app-openlist2" "main"
 UPDATE_PACKAGE "partexp" "sirpdboy/luci-app-partexp" "main"
