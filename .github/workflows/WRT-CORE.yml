@@ -178,7 +178,7 @@ jobs:
             cat $GITHUB_WORKSPACE/Config/$WRT_CONFIG.txt $GENERAL_FILE >> .config
           fi
 
-          $GITHUB_WORKSPACE/Scripts/Settings.sh
+          $GITHUB_WORKSPACE/Scripts/Settings-$WRT_CONFIG.sh
 
           make defconfig -j$(nproc)
 

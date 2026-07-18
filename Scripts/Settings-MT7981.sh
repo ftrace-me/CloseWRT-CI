@@ -52,15 +52,11 @@ if [ -n "$WRT_PACKAGE" ]; then
 	echo -e "$WRT_PACKAGE" >> ./.config
 fi
 
-# 物理删除 feeds 和 package 中的 autocore 插件目录，防止其进行 any 编译与打包
-rm -rf ./feeds/packages/package/emortal/autocore
-rm -rf ./package/emortal/autocore
-
 # 使用系统原生 Go 编译器
 ./scripts/feeds update -i
 ./scripts/feeds install -f golang
 
-# 删除与 Go 不兼容的旧版 feeds 插件
+# 删除与 Go 不兼容 of 旧版 feeds 插件
 rm -rf ./feeds/packages/net/v2ray-plugin
 
 # 强制删除编译扫描缓存
