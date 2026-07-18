@@ -57,20 +57,11 @@ rm -rf ./feeds/packages/package/emortal/autocore
 rm -rf ./package/emortal/autocore
 
 # 使用系统原生 Go 编译器
-
 ./scripts/feeds update -i
 ./scripts/feeds install -f golang
 
-
-# 删除与 Go 23.x 不兼容的旧版 feeds 插件
+# 删除与 Go 不兼容的旧版 feeds 插件
 rm -rf ./feeds/packages/net/v2ray-plugin
-# 删除会导致编译报错的非核心插件 geoview 和含有复杂依赖（如 Rust/Chrome 编译链/Go旧版）的非必要代理包
-rm -rf ./package/openwrt-passwall-packages/geoview
-rm -rf ./package/openwrt-passwall-packages/naiveproxy
-rm -rf ./package/openwrt-passwall-packages/shadow-tls
-rm -rf ./package/openwrt-passwall-packages/tuic-client
-rm -rf ./package/openwrt-passwall-packages/v2ray-plugin
 
-# 强制删除编译扫描缓存，迫使系统在下一阶段重新扫描并加载 feeds/packages/lang/golang 的 Go 23.x 编译器
+# 强制删除编译扫描缓存
 rm -rf ./tmp
-
