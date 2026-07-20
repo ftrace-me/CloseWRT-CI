@@ -97,13 +97,13 @@ CONFIG_PACKAGE_iptables-mod-conntrack-extra=y
 CONFIG_PACKAGE_iptables-mod-extra=y
 CONFIG_PACKAGE_iptables-mod-filter=y
 CONFIG_PACKAGE_iptables-mod-hashlimit=y
-CONFIG_PACKAGE_iptables-mod-iface=y
-CONFIG_PACKAGE_iptables-mod-ipmark=y
+# CONFIG_PACKAGE_iptables-mod-iface is not set
+# CONFIG_PACKAGE_iptables-mod-ipmark is not set
 CONFIG_PACKAGE_iptables-mod-ipopt=y
 CONFIG_PACKAGE_iptables-mod-iprange=y
-CONFIG_PACKAGE_iptables-mod-ipv4options=y
+# CONFIG_PACKAGE_iptables-mod-ipv4options is not set
 CONFIG_PACKAGE_iptables-mod-nat-extra=y
-CONFIG_PACKAGE_iptables-mod-proto=y
+# CONFIG_PACKAGE_iptables-mod-proto is not set
 CONFIG_PACKAGE_iptables-mod-tee=y
 CONFIG_PACKAGE_iptables-mod-tproxy=y
 CONFIG_PACKAGE_iptables-mod-u32=y
@@ -122,16 +122,16 @@ CONFIG_PACKAGE_kmod-ipt-core=y
 CONFIG_PACKAGE_kmod-ipt-extra=y
 CONFIG_PACKAGE_kmod-ipt-filter=y
 CONFIG_PACKAGE_kmod-ipt-hashlimit=y
-CONFIG_PACKAGE_kmod-ipt-iface=y
-CONFIG_PACKAGE_kmod-ipt-ipmark=y
+# CONFIG_PACKAGE_kmod-ipt-iface is not set
+# CONFIG_PACKAGE_kmod-ipt-ipmark is not set
 CONFIG_PACKAGE_kmod-ipt-ipopt=y
 CONFIG_PACKAGE_kmod-ipt-iprange=y
 CONFIG_PACKAGE_kmod-ipt-ipset=y
-CONFIG_PACKAGE_kmod-ipt-ipv4options=y
+# CONFIG_PACKAGE_kmod-ipt-ipv4options is not set
 CONFIG_PACKAGE_kmod-ipt-nat=y
 CONFIG_PACKAGE_kmod-ipt-nat-extra=y
 CONFIG_PACKAGE_kmod-ipt-offload=y
-CONFIG_PACKAGE_kmod-ipt-proto=y
+# CONFIG_PACKAGE_kmod-ipt-proto is not set
 CONFIG_PACKAGE_kmod-ipt-raw6=y
 CONFIG_PACKAGE_kmod-ipt-tee=y
 CONFIG_PACKAGE_kmod-ipt-tproxy=y
