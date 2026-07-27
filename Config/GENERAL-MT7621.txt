@@ -1,7 +1,7 @@
 # 科学上网 PassWall
 CONFIG_PACKAGE_luci-app-passwall=y
 CONFIG_PACKAGE_luci-app-passwall_Nftables_Transparent_Proxy=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Sing-Box=y
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Sing-Box is not set
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray=y
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Plugin is not set
 # CONFIG_PACKAGE_v2ray-plugin is not set
