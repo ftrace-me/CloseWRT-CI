@@ -65,7 +65,7 @@ jobs:
       matrix:
         CONFIG: [MT7621]
         REPO_INFO:
-          - {SOURCE: "immortalwrt/immortalwrt", BRANCH: "v23.05.4"}
+          - {SOURCE: "immortalwrt/immortalwrt", BRANCH: "v23.05.7"}
 
     #调用公用编译核心WRT-CORE.yml
     uses: ./.github/workflows/WRT-CORE.yml
