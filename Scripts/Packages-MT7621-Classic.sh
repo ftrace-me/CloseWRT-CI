@@ -5,9 +5,9 @@ echo "src-git kenzo https://github.com/kenzok8/openwrt-packages" >> ../feeds.con
 echo "src-git small https://github.com/kenzok8/small" >> ../feeds.conf.default
 echo "src-git passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main" >> ../feeds.conf.default
 
-# Replace Go toolchain with 24.x to support compiling modern xray-core on 18.06
+# Replace Go toolchain with 26.x to support compiling modern xray-core on 18.06 (requires Go >= 1.26)
 rm -rf ../feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 24.x ../feeds/packages/lang/golang
+git clone https://github.com/sbwml/packages_lang_golang -b 26.x ../feeds/packages/lang/golang
 
 # Clone 18.06 compatible luci-theme-argon directly to package directory to guarantee precedence
 rm -rf ../feeds/luci/themes/luci-theme-argon
