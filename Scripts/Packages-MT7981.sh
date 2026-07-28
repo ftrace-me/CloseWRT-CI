@@ -50,21 +50,34 @@ UPDATE_PACKAGE() {
 rm -rf ../feeds/packages/lang/golang
 git clone --depth=1 --single-branch --branch 26.x https://github.com/sbwml/packages_lang_golang.git ../feeds/packages/lang/golang
 
-# 替换为最新 PassWall 官方 feed（hanwckf 21.02 源自带的 passwall 版本过旧）
-rm -rf ../feeds/luci/applications/luci-app-passwall
-rm -rf ../feeds/packages/net/chinadns-ng
-rm -rf ../feeds/packages/net/dns2socks
-rm -rf ../feeds/packages/net/dns2tcp
-rm -rf ../feeds/packages/net/ipt2socks
-rm -rf ../feeds/packages/net/microsocks
-rm -rf ../feeds/packages/net/tcping
-rm -rf ../feeds/packages/net/xray-core
-git clone --depth=1 --single-branch --branch main https://github.com/xiaorouji/openwrt-passwall-packages.git passwall_packages
-find ./passwall_packages/ -maxdepth 1 -mindepth 1 -type d -exec cp -rf {} ../ \;
-rm -rf ./passwall_packages/
-git clone --depth=1 --single-branch --branch main https://github.com/xiaorouji/openwrt-passwall.git passwall
-cp -rf ./passwall/luci-app-passwall ../feeds/luci/applications/
-rm -rf ./passwall/
+# 添加 PassWall 软件源
+echo "src-git passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main" >> ../feeds.conf.default
+echo "src-git passwall https://github.com/Openwrt-Passwall/openwrt-passwall.git;main" >> ../feeds.conf.default
+
+# 更新并安装 feeds 中的 PassWall
+cd ..
+./scripts/feeds update -a
+
+# 删除官方软件源中可能冲突和不兼容的老旧包（hanwckf 21.02 源自带的版本过旧）
+rm -rf ./feeds/luci/applications/luci-app-passwall
+rm -rf ./feeds/packages/net/chinadns-ng
+rm -rf ./feeds/packages/net/dns2socks
+rm -rf ./feeds/packages/net/dns2tcp
+rm -rf ./feeds/packages/net/ipt2socks
+rm -rf ./feeds/packages/net/microsocks
+rm -rf ./feeds/packages/net/tcping
+rm -rf ./feeds/packages/net/xray-core
+rm -rf ./feeds/packages/net/v2ray-core
+rm -rf ./feeds/packages/net/v2ray-plugin
+rm -rf ./feeds/packages/net/v2ray
+
+./scripts/feeds install -a -f -p passwall_packages
+./scripts/feeds install -a -f -p passwall
+./scripts/feeds install -a
+cd package
+
+# 获取更轻量的 luci-theme-design 主题替代 argon
+git clone --depth=1 --single-branch --branch master https://github.com/gSpotx2f/luci-theme-design.git
 
 # 启用及拉取的第三方包
 UPDATE_PACKAGE "diskman" "lisaac/luci-app-diskman" "master"
