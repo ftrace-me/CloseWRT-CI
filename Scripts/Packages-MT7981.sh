@@ -50,6 +50,22 @@ UPDATE_PACKAGE() {
 rm -rf ../feeds/packages/lang/golang
 git clone --depth=1 --single-branch --branch 26.x https://github.com/sbwml/packages_lang_golang.git ../feeds/packages/lang/golang
 
+# 替换为最新 PassWall 官方 feed（hanwckf 21.02 源自带的 passwall 版本过旧）
+rm -rf ../feeds/luci/applications/luci-app-passwall
+rm -rf ../feeds/packages/net/chinadns-ng
+rm -rf ../feeds/packages/net/dns2socks
+rm -rf ../feeds/packages/net/dns2tcp
+rm -rf ../feeds/packages/net/ipt2socks
+rm -rf ../feeds/packages/net/microsocks
+rm -rf ../feeds/packages/net/tcping
+rm -rf ../feeds/packages/net/xray-core
+git clone --depth=1 --single-branch --branch main https://github.com/xiaorouji/openwrt-passwall-packages.git passwall_packages
+find ./passwall_packages/ -maxdepth 1 -mindepth 1 -type d -exec cp -rf {} ../ \;
+rm -rf ./passwall_packages/
+git clone --depth=1 --single-branch --branch main https://github.com/xiaorouji/openwrt-passwall.git passwall
+cp -rf ./passwall/luci-app-passwall ../feeds/luci/applications/
+rm -rf ./passwall/
+
 # 启用及拉取的第三方包
 UPDATE_PACKAGE "diskman" "lisaac/luci-app-diskman" "master"
 UPDATE_PACKAGE "openlist2" "sbwml/luci-app-openlist2" "main"
