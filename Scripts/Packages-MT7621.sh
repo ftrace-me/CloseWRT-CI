@@ -56,7 +56,15 @@ echo "src-git passwall https://github.com/Openwrt-Passwall/openwrt-passwall.git;
 
 # 更新并安装 feeds 中的 PassWall
 cd ..
-./scripts/feeds update passwall passwall_packages
+./scripts/feeds update -a
+
+# 删除官方软件源中可能冲突和不兼容的 xray/v2ray 核心包
+rm -rf ./feeds/packages/net/xray-core
+rm -rf ./feeds/packages/net/v2ray-core
+rm -rf ./feeds/packages/net/v2ray-plugin
+rm -rf ./feeds/packages/net/v2ray
+
 ./scripts/feeds install -a -f -p passwall_packages
 ./scripts/feeds install -a -f -p passwall
+./scripts/feeds install -a
 cd package

@@ -13,9 +13,19 @@ rm -rf ../feeds/luci/themes/luci-theme-argon
 rm -rf ../package/feeds/luci/luci-theme-argon
 git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git ../package/luci-theme-argon
 
-# Update and install the feeds
+# Update feeds first to pull repositories
 cd ..
-./scripts/feeds update kenzo small
+./scripts/feeds update -a
+
+# Delete duplicate and incompatible xray/v2ray packages from official packages feed
+rm -rf ./feeds/packages/net/xray-core
+rm -rf ./feeds/packages/net/v2ray-core
+rm -rf ./feeds/packages/net/v2ray-plugin
+rm -rf ./feeds/packages/net/v2ray
+rm -rf ./feeds/packages/net/sing-box
+
+# Re-install all packages, forcing small and kenzo priority
 ./scripts/feeds install -a -f -p small
 ./scripts/feeds install -a -f -p kenzo
+./scripts/feeds install -a
 cd package
