@@ -40,6 +40,10 @@ on:
       WRT_TEST:
         required: false
         type: string
+      WRT_RUNNER:
+        required: false
+        type: string
+        default: 'ubuntu-24.04'
 
 env:
   GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -59,7 +63,7 @@ env:
 jobs:
   core:
     name: ${{inputs.WRT_SOURCE}}
-    runs-on: ubuntu-24.04
+    runs-on: ${{ inputs.WRT_RUNNER }}
     steps:
       - name: Checkout Projects
         uses: actions/checkout@main
@@ -70,6 +74,9 @@ jobs:
         run: |
           sudo -E apt -yqq update
           sudo -E apt -yqq install dos2unix python3-netifaces libfuse-dev aria2 python3-setuptools python-is-python3
+          if [ "$(lsb_release -rs)" = "22.04" ]; then
+            sudo -E apt -yqq install python3-distutils
+          fi
           sudo bash -c 'bash <(curl -sL https://build-scripts.immortalwrt.org/init_build_environment.sh)'
           sudo npm install -g pnpm
           sudo -E systemctl daemon-reload

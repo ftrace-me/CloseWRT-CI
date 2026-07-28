@@ -89,3 +89,5 @@ jobs:
       WRT_PACKAGE: ${{inputs.PACKAGE}}
       #仅输出配置文件
       WRT_TEST: ${{inputs.TEST}}
+      #指定专用编译环境（18.06 需使用 22.04）
+      WRT_RUNNER: ubuntu-22.04
