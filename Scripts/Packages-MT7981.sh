@@ -46,6 +46,10 @@ UPDATE_PACKAGE() {
 	fi
 }
 
+# 升级 Go 工具链至 1.26.x，满足最新 xray-core / sing-box (requires go >= 1.26) 的编译要求
+rm -rf ../feeds/packages/lang/golang
+git clone --depth=1 --single-branch --branch 26.x https://github.com/sbwml/packages_lang_golang.git ../feeds/packages/lang/golang
+
 # 启用及拉取的第三方包
 UPDATE_PACKAGE "diskman" "lisaac/luci-app-diskman" "master"
 UPDATE_PACKAGE "openlist2" "sbwml/luci-app-openlist2" "main"
