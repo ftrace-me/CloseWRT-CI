@@ -34,14 +34,5 @@ if [ -n "$WRT_PACKAGE" ]; then
 	echo -e "$WRT_PACKAGE" >> ./.config
 fi
 
-# 删除与 Go 不兼容的旧版 feeds 插件
-rm -rf ./feeds/packages/net/v2ray-plugin
-
-# 修改 PassWall Makefile，精简其依赖包（彻底移除 dns2socks, ipt2socks, microsocks, tcping, unzip 等）
-PASSWALL_MAKEFILE=$(find ./feeds/ -type f -path "*/luci-app-passwall/Makefile" | head -n 1)
-if [ -n "$PASSWALL_MAKEFILE" ] && [ -f "$PASSWALL_MAKEFILE" ]; then
-	sed -i 's/DEPENDS:=.*/DEPENDS:=+dnsmasq-full +iptables +iptables-mod-tproxy +libuci-lua +lua +resolveip/g' $PASSWALL_MAKEFILE
-fi
-
 # 强制删除编译扫描缓存
 rm -rf ./tmp
