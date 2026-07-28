@@ -190,6 +190,17 @@ jobs:
 
           make defconfig -j$(nproc)
 
+          # make defconfig 会静默丢弃它不认识的 TARGET_DEVICE 配置项（选回字母第一的默认设备）
+          # 修复：defconfig 结束后强制重新注入设备选择，确保编译的是正确设备
+          DEVICE_LINE=$(grep -m1 '^CONFIG_TARGET_DEVICE_' "$GITHUB_WORKSPACE/Config/$WRT_CONFIG.txt" || true)
+          if [ -n "$DEVICE_LINE" ]; then
+            DEVICE_KEY=$(echo "$DEVICE_LINE" | cut -d= -f1)
+            echo "Re-injecting device config: $DEVICE_LINE"
+            sed -i "/^${DEVICE_KEY}/d" .config
+            echo "$DEVICE_LINE" >> .config
+            make defconfig -j$(nproc)
+          fi
+
       - name: Download Packages
         if: env.WRT_TEST != 'true'
         run: |
