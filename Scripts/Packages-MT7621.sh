@@ -49,3 +49,14 @@ UPDATE_PACKAGE() {
 # 极简模式：拉取磁盘管理及分区扩容工具
 UPDATE_PACKAGE "diskman" "lisaac/luci-app-diskman" "master"
 UPDATE_PACKAGE "partexp" "sirpdboy/luci-app-partexp" "main"
+
+# 添加 PassWall 软件源
+echo "src-git passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main" >> ../feeds.conf.default
+echo "src-git passwall https://github.com/Openwrt-Passwall/openwrt-passwall.git;main" >> ../feeds.conf.default
+
+# 更新并安装 feeds 中的 PassWall
+cd ..
+./scripts/feeds update passwall passwall_packages
+./scripts/feeds install -a -f -p passwall_packages
+./scripts/feeds install -a -f -p passwall
+cd package
