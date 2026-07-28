@@ -1,8 +1,9 @@
 #!/bin/bash
 
-# Add PassWall feeds from kenzok8 (18.06 compatible)
+# Add PassWall feeds from kenzok8 (18.06 compatible LuCI) and official PassWall packages (for compilable binaries)
 echo "src-git kenzo https://github.com/kenzok8/openwrt-packages" >> ../feeds.conf.default
 echo "src-git small https://github.com/kenzok8/small" >> ../feeds.conf.default
+echo "src-git passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main" >> ../feeds.conf.default
 
 # Replace Go toolchain with 24.x to support compiling modern xray-core on 18.06
 rm -rf ../feeds/packages/lang/golang
@@ -17,14 +18,21 @@ git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git ../package/
 cd ..
 ./scripts/feeds update -a
 
-# Delete duplicate and incompatible xray/v2ray packages from official packages feed
+# Delete duplicate and incompatible xray/v2ray packages from official packages feed AND small feed
 rm -rf ./feeds/packages/net/xray-core
 rm -rf ./feeds/packages/net/v2ray-core
 rm -rf ./feeds/packages/net/v2ray-plugin
 rm -rf ./feeds/packages/net/v2ray
 rm -rf ./feeds/packages/net/sing-box
 
-# Re-install all packages, forcing small and kenzo priority
+rm -rf ./feeds/small/xray-core
+rm -rf ./feeds/small/v2ray-core
+rm -rf ./feeds/small/v2ray-plugin
+rm -rf ./feeds/small/v2ray
+rm -rf ./feeds/small/sing-box
+
+# Re-install all packages, forcing passwall_packages priority for binary cores, and small/kenzo for others
+./scripts/feeds install -a -f -p passwall_packages
 ./scripts/feeds install -a -f -p small
 ./scripts/feeds install -a -f -p kenzo
 ./scripts/feeds install -a
