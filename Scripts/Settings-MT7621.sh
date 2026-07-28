@@ -39,5 +39,11 @@ if [ -n "$WRT_PACKAGE" ]; then
 	echo -e "$WRT_PACKAGE" >> ./.config
 fi
 
+# 压缩 Xray-core 二进制，极限节省固件体积 (大约可节省 4MB-5MB 闪存空间)
+XRAY_MAKEFILE=$(find ./feeds/ -type f -path "*/xray-core/Makefile" | head -n 1)
+if [ -n "$XRAY_MAKEFILE" ] && [ -f "$XRAY_MAKEFILE" ]; then
+	sed -i 's/\$(INSTALL_BIN) \$(PKG_INSTALL_DIR)\/usr\/bin\/main \$(1)\/usr\/bin\/xray/upx --lzma --best \$(PKG_INSTALL_DIR)\/usr\/bin\/main || true\n\t\$(INSTALL_BIN) \$(PKG_INSTALL_DIR)\/usr\/bin\/main \$(1)\/usr\/bin\/xray/g' $XRAY_MAKEFILE
+fi
+
 # 强制删除编译扫描缓存
 rm -rf ./tmp
