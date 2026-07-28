@@ -2,7 +2,7 @@
 
 # Add PassWall feeds
 echo "src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-packages.git;main" >> ../feeds.conf.default
-echo "src-git passwall https://github.com/xiaorouji/openwrt-passwall.git;main" >> ../feeds.conf.default
+echo "src-git passwall https://github.com/xiaorouji/openwrt-passwall.git;luci-18.06" >> ../feeds.conf.default
 
 # Replace Go toolchain with 24.x to support compiling modern xray-core on 18.06
 rm -rf ../feeds/packages/lang/golang

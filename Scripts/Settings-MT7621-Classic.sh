@@ -15,7 +15,6 @@ sed -i "s/hostname='.*'/hostname='$WRT_NAME'/g" $CFG_FILE
 echo "CONFIG_PACKAGE_luci=y" >> ./.config
 echo "CONFIG_LUCI_LANG_zh_Hans=y" >> ./.config
 echo "CONFIG_PACKAGE_luci-theme-$WRT_THEME=y" >> ./.config
-echo "CONFIG_PACKAGE_luci-app-$WRT_THEME-config=y" >> ./.config
 
 # 修复 tools/flex gettext version mismatch 导致编译失败的问题
 sed -i 's/\$(eval \$(call HostBuild))//g' tools/flex/Makefile
