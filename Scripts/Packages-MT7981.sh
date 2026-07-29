@@ -76,8 +76,7 @@ rm -rf ./feeds/packages/net/v2ray
 ./scripts/feeds install -a
 cd package
 
-# 获取更轻量的 luci-theme-design 主题替代 argon
-git clone --depth=1 --single-branch --branch js https://github.com/0x676e67/luci-theme-design.git
+
 
 # 启用及拉取的第三方包
 UPDATE_PACKAGE "diskman" "lisaac/luci-app-diskman" "master"
