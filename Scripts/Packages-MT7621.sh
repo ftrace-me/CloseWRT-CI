@@ -55,7 +55,7 @@ UPDATE_PACKAGE "diskman" "lisaac/luci-app-diskman" "master"
 UPDATE_PACKAGE "partexp" "sirpdboy/luci-app-partexp" "main"
 
 # 获取更轻量的 luci-theme-design 主题替代 argon
-git clone --depth=1 --single-branch --branch master https://github.com/gSpotx2f/luci-theme-design.git
+git clone --depth=1 --single-branch --branch master https://github.com/0x676e67/luci-theme-design.git
 
 # 添加 PassWall 软件源
 echo "src-git passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main" >> ../feeds.conf.default
