@@ -76,20 +76,21 @@ CONFIG_PACKAGE_kmod-nft-tproxy=y
 CONFIG_PACKAGE_kmod-nft-xfrm=y
 
 CONFIG_PACKAGE_kmod-tun=y
-CONFIG_PACKAGE_kmod-usb3=y
+# 彻底移除无用的 USB 和 SATA 相关驱动及工具 (百里无 USB 接口)
+# CONFIG_PACKAGE_kmod-usb3 is not set
+# CONFIG_PACKAGE_kmod-usb-dwc3 is not set
+# CONFIG_PACKAGE_kmod-usb-storage is not set
+# CONFIG_PACKAGE_kmod-usb-storage-extras is not set
+# CONFIG_PACKAGE_kmod-usb-storage-uas is not set
+# CONFIG_PACKAGE_usbutils is not set
 
-CONFIG_PACKAGE_kmod-usb-dwc3=y
-
-CONFIG_PACKAGE_kmod-usb-storage=y
-CONFIG_PACKAGE_kmod-usb-storage-extras=y
-CONFIG_PACKAGE_kmod-usb-storage-uas=y
 CONFIG_PACKAGE_kmod-veth=y
 CONFIG_PACKAGE_kmod-wireguard=y
 #组件调整
 CONFIG_PACKAGE_autocore-arm=y
 CONFIG_DEFAULT_autocore-arm=y
 CONFIG_TARGET_DEVICE_PACKAGES_mediatek_filogic_DEVICE_jdcloud_re-cp-03=""
-CONFIG_PACKAGE_automount=y
+# CONFIG_PACKAGE_automount is not set
 CONFIG_PACKAGE_blkid=y
 # CONFIG_PACKAGE_cpufreq is not set
 CONFIG_PACKAGE_curl=y
@@ -108,8 +109,6 @@ CONFIG_PACKAGE_mmc-utils=y
 CONFIG_PACKAGE_nand-utils=y
 CONFIG_PACKAGE_openssl-util=y
 CONFIG_PACKAGE_sgdisk=y
-
-CONFIG_PACKAGE_usbutils=y
 #闭源MTK系列调整，请勿修改
 CONFIG_PACKAGE_luci-app-eqos-mtk=y
 CONFIG_PACKAGE_luci-app-mtwifi-cfg=y
@@ -126,7 +125,7 @@ CONFIG_PACKAGE_ipset=y
 
 CONFIG_PACKAGE_iw=y
 CONFIG_PACKAGE_iwinfo=y
-CONFIG_PACKAGE_kmod-ata-core=y
+# CONFIG_PACKAGE_kmod-ata-core is not set
 CONFIG_PACKAGE_kmod-conninfra=y
 
 CONFIG_PACKAGE_kmod-fs-autofs4=y
