@@ -73,7 +73,7 @@ jobs:
           DEBIAN_FRONTEND: noninteractive
         run: |
           sudo -E apt -yqq update
-          sudo -E apt -yqq install dos2unix python3-netifaces libfuse-dev aria2 python3-setuptools python-is-python3 upx-ucl
+          sudo -E apt -yqq install dos2unix python3-netifaces libfuse-dev aria2 python3-setuptools python-is-python3 upx-ucl clang llvm
           if [ "$(lsb_release -rs)" = "22.04" ]; then
             sudo -E apt -yqq install python3-distutils
           fi
