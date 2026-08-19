@@ -61,6 +61,7 @@ cd ..
 # 删除官方软件源中可能冲突和不兼容的老旧包（hanwckf 21.02 源自带的版本过旧）
 rm -rf ./feeds/luci/applications/luci-app-passwall
 rm -rf ./feeds/luci/applications/luci-app-passwall2
+rm -rf ./feeds/packages/net/v2ray-geodata
 rm -rf ./feeds/packages/net/chinadns-ng
 rm -rf ./feeds/packages/net/dns2socks
 rm -rf ./feeds/packages/net/dns2tcp

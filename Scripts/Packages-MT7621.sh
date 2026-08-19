@@ -65,6 +65,7 @@ cd ..
 ./scripts/feeds update -a
 
 # 删除官方软件源中可能冲突和不兼容的 xray/v2ray 核心包
+rm -rf ./feeds/packages/net/v2ray-geodata
 rm -rf ./feeds/packages/net/xray-core
 rm -rf ./feeds/packages/net/v2ray-core
 rm -rf ./feeds/packages/net/v2ray-plugin
