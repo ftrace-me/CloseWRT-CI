@@ -56,22 +56,25 @@ UPDATE_PACKAGE "partexp" "sirpdboy/luci-app-partexp" "main"
 
 
 
-# 添加 PassWall 软件源
+# 添加 PassWall 2 软件源
 echo "src-git passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main" >> ../feeds.conf.default
-echo "src-git passwall https://github.com/Openwrt-Passwall/openwrt-passwall.git;main" >> ../feeds.conf.default
+echo "src-git passwall2 https://github.com/Openwrt-Passwall/openwrt-passwall2.git;main" >> ../feeds.conf.default
 
-# 更新并安装 feeds 中的 PassWall
+# 更新并安装 feeds 中的 PassWall 2
 cd ..
 ./scripts/feeds update -a
 
 # 删除官方软件源中可能冲突和不兼容的 xray/v2ray 核心包
+rm -rf ./feeds/luci/applications/luci-app-passwall
+rm -rf ./feeds/luci/applications/luci-app-passwall2
 rm -rf ./feeds/packages/net/v2ray-geodata
 rm -rf ./feeds/packages/net/xray-core
+rm -rf ./feeds/packages/net/sing-box
 rm -rf ./feeds/packages/net/v2ray-core
 rm -rf ./feeds/packages/net/v2ray-plugin
 rm -rf ./feeds/packages/net/v2ray
 
 ./scripts/feeds install -a -f -p passwall_packages
-./scripts/feeds install -a -f -p passwall
+./scripts/feeds install -a -f -p passwall2
 ./scripts/feeds install -a
 cd package
