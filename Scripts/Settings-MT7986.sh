@@ -28,11 +28,24 @@ sed -i "s/192\.168\.[0-9]*\.[0-9]*/$WRT_IP/g" $CFG_FILE
 #修改默认主机名
 sed -i "s/hostname='.*'/hostname='$WRT_NAME'/g" $CFG_FILE
 
-#配置文件修改
+# 配置文件修改
 echo "CONFIG_PACKAGE_luci=y" >> ./.config
 echo "CONFIG_LUCI_LANG_zh_Hans=y" >> ./.config
 echo "CONFIG_PACKAGE_luci-theme-$WRT_THEME=y" >> ./.config
 echo "CONFIG_PACKAGE_luci-app-$WRT_THEME-config=y" >> ./.config
+
+# 优化 Docker 配置：启用 overlay2 极速存储引擎与日志轮转限制（防止占满 128G eMMC）
+mkdir -p ./package/base-files/files/etc/docker
+cat << 'EOF' > ./package/base-files/files/etc/docker/daemon.json
+{
+  "storage-driver": "overlay2",
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "10m",
+    "max-file": "3"
+  }
+}
+EOF
 
 # 修复 tools/flex gettext version mismatch 导致编译失败的问题
 sed -i 's/\$(eval \$(call HostBuild))//g' tools/flex/Makefile
