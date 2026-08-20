@@ -59,5 +59,8 @@ fi
 # 删除与 Go 不兼容 of 旧版 feeds 插件
 rm -rf ./feeds/packages/net/v2ray-plugin
 
+# 彻底删除 rust 源码目录，100% 杜绝 rust/host 编译
+rm -rf ./feeds/packages/lang/rust
+
 # 强制删除编译扫描缓存
 rm -rf ./tmp

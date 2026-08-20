@@ -45,5 +45,8 @@ if [ -n "$XRAY_MAKEFILE" ] && [ -f "$XRAY_MAKEFILE" ]; then
 	sed -i 's/\$(INSTALL_BIN) \$(PKG_INSTALL_DIR)\/usr\/bin\/main \$(1)\/usr\/bin\/xray/upx --lzma --best \$(PKG_INSTALL_DIR)\/usr\/bin\/main || true\n\t\$(INSTALL_BIN) \$(PKG_INSTALL_DIR)\/usr\/bin\/main \$(1)\/usr\/bin\/xray/g' $XRAY_MAKEFILE
 fi
 
+# 彻底删除 rust 源码目录，100% 杜绝 rust/host 编译
+rm -rf ./feeds/packages/lang/rust
+
 # 强制删除编译扫描缓存
 rm -rf ./tmp
